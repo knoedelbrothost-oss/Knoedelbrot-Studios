@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+</head>
+
+<body>
+    <div id="login-container"></div>
+
+    <script>
+        fetch("https://knoedelbrot.de/login.html")
+            .then(res => res.text())
+            .then(html => document.getElementById("login-container").innerHTML = html)
+            .catch(err => console.error(err));
+    </script>
+</body>
