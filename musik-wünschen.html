@@ -120,23 +120,7 @@
             font-size: 1em;
             font-weight: 500;
         }
-
-        #content {
-            display: none;
-            text-align: center;
-            animation: fadeIn 0.7s;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        #content h2 {
-            color: #4f8cff;
-            margin-bottom: 0.7em;
-            font-size: 1.3em;
-        }
-
+        
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -159,25 +143,6 @@
 
 <body>
     <script>
-        fetch('header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.body.insertAdjacentHTML('afterbegin', data);
-                const menuToggle = document.getElementById('menu-toggle');
-                const navMenu = document.getElementById('nav-menu');
-
-                menuToggle.addEventListener('click', () => {
-                    navMenu.classList.toggle('open');
-                    menuToggle.classList.toggle('open');
-                });
-            });
-    </script>
-    <header>
-        <h1>Musik wünschen</h1> 
-        <p>Knödelbrot Studios</p> 
-    </header>
-    <main>
-        <script>
         function getCookie(name) {
             const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);
@@ -190,7 +155,29 @@
         else if (getCookie('bonus') !== 'ultra' && getCookie('bonus') !== 'partner' && getCookie('bonus') !== 'shop premium' && getCookie('bonus') !== 'basic' && getCookie('bonus') !== 'magazin') {
             alert("Du hast leider keinen Zugriff auf diese Seite. Bitte melde dich mit einem autorisiertem Bonus-Account an.");
         }
-        </script>
+    </script>
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('afterbegin', data);
+                const menuToggle = document.getElementById('menu-toggle');
+                if (menuToggle) { // <-- absichern
+                    const navMenu = document.getElementById('nav-menu');
+                    menuToggle.addEventListener('click', () => {
+                        navMenu.classList.toggle('open');
+                        menuToggle.classList.toggle('open');
+                    });
+                }
+            })
+            .catch(err => console.error(err));
+
+    </script>
+    <header>
+        <h1>Musik wünschen</h1> 
+        <p>Knödelbrot Studios</p> 
+    </header>
+    <main>
         <div id="content">
             <h2>Willkommen!</h2> <br>
             <p>Hier kannst du deine Songwünsche einreichen.</p> <br>
